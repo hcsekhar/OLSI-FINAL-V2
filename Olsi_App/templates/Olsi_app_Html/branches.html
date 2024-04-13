@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  OLSI | Branches
+{% endblock %}
+{% block content %}
+<style>
+  .container {
+    width: 100%;
+    
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  .select-state {
+    width: 250px;
+    padding: 5px;
+  }
+  
+  @media (max-width: 480px) {
+    th, td {
+      padding: 4px;
+      font-size: 12px;
+    }
+    
+  }
+</style>
+
+<div class="container-fluid text-center" style="margin: 50px 0;">
+  <!-- Branches dropdown -->
+  <h2 class="display-5">OLSI BRANCHES</h2>
+  {% comment %} <p class="lead">Check out our branch offices in all over the country</p> {% endcomment %}
+</br>
+  <form action="/vwbranch" method="GET">
+  <select class="select-state my-3"name="branch1" >
+    <option value="State" class="options">State</option>
+    
+      
+        {% for i in state %}
+          <option style="padding: 10px;" class="options" value="{{i.slug}}">
+          {{ i.name }}
+          </option>
+        {% endfor %}        
+    
+    <!-- Branches dropdown ended -->
+  </select>
+  <button class="btn btn-primary" type="submit">Search</button>
+</form>
+</div>
+
+ 
+<div class="container mt-5" style="width: 100%">
+  <table class="table table-hover align-middle">
+    <thead>
+      <tr>
+        <th scope="col" class="text-primary">Sl.No</th>
+        <th scope="col" class="text-primary">State</th>
+        <th scope="col" class="text-primary">District</th>
+        <th scope="col" class="text-primary">Address</th>
+        <th scope="col" class="text-primary">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in item %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td scope="row">{{ i.state }}</td>
+            <td scope="row">{{ i.District }}</td>
+            <td scope="row" class="text-wrap">{{ i.Address }}</td>
+            <td scope="row">{{ i.name }}</td>
+          </tr>
+        {% endfor %}
+      
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

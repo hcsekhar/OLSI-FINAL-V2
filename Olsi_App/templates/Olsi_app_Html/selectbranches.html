@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  OLSI | Team
+{% endblock %}
+{% block content %}
+  <style>
+    .select-state {
+      width: 250px;
+      padding: 5px;
+    }
+    
+   
+  </style>
+
+  <div class="container-fluid text-center" style="margin: 100px 0;">
+    <!-- Branches dropdown -->
+    <h2 class="display-5">OLSI BRANCHES</h2>
+    {% comment %} <p class="lead">Check out our branch offices in all over the country</p> {% endcomment %}
+  </br></br><br>
+    <form action="/vwbranch" method="GET">
+    <select class="select-state my-3"name="branch1" >
+      <option value="State">State</option>
+      <div class="search-container" style="display:">
+        
+          {% for i in state %}
+            <option style="padding: 10px; width:130px;" value="{{i.slug}}">
+            {{ i.name }}
+            </option>
+          {% endfor %}        
+      </div>
+      <!-- Branches dropdown ended -->
+    </select>
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+  </div>
+
+  {% comment %} <iframe src="branches.html" frameborder="0"></iframe> {% endcomment %}
+{% endblock %}
